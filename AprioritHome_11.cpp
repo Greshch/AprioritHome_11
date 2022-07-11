@@ -42,8 +42,8 @@ int main()
 		std::cout << cur->id << "\t" << cur->salary << "\n";
 	}
 
-	// Remove workers with too big salary
-
+	
+	// count dismised workers
 	int dismised = 0;
 	for (Worker* cur = head; cur != nullptr; cur = cur->next)
 	{
@@ -59,13 +59,16 @@ int main()
 	std::cout << "\n";
 	std::cout << "\n";
 
+	// Remove workers with too big salary
 	for (int i = 0; i < dismised; i++)
 	{
 		for (Worker* cur = head; cur != nullptr; cur = cur->next)
 		{
 			if (cur->next != nullptr && cur->salary == 0)
 			{
+				// swap fields neighbors Workers
 				Worker* next = cur->next;
+
 				int tmpId = cur->id;
 				cur->id = next->id;
 				next->id = tmpId;
@@ -82,5 +85,19 @@ int main()
 	{
 		std::cout << cur->id << "\t" << cur->salary << "\n";
 	}
+
+
+	// Remove workers
+	Worker* prev = head;
+	for (Worker* cur = head->next; cur != nullptr; cur = cur->next)
+	{
+		delete prev;
+		prev = nullptr;
+
+		prev = cur;
+	}
+	delete prev; // last element
+	prev = nullptr;
+
 }
 
